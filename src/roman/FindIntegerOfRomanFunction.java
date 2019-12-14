@@ -5,12 +5,14 @@ import java.util.Map;
 
 public class FindIntegerOfRomanFunction {
 	public int romanToInt(String s) {
+		// Error checking
 		if (s == null || s.length() == 0) {
 			return 0;
 		}
 
 		Map<Character, Integer> map = new HashMap();
 
+		// All given
 		map.put('I', 1);
 		map.put('V', 5);
 		map.put('X', 10);
@@ -23,16 +25,16 @@ public class FindIntegerOfRomanFunction {
 		// if there is only 1 symbol, it will just return result
 		int result = map.get(s.charAt(s.length() - 1));
 
-		// Read from right to left, using length -2 since result is already the
-		// last element
+		// Read from right to left to prevent negative and also roman is always right to left
+		// using length -2 since result is already the last element from the above code
 		for (int i = s.length() - 2; i >= 0; i--) {
-			// if current is bigger or equal to next character
-			if (map.get(s.charAt(i)) >= map.get(s.charAt(i + 1))) {
+			// if current is less than the next character
+			if (map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) {
+				// Then delete from result, for example IV is 4, not 6
+				result -= map.get(s.charAt(i));
+			} else { // if current is bigger or equal to next character
 				// Then add it to the result
 				result += map.get(s.charAt(i));
-			} else { // if current is less than the next character
-				// Then delete from result
-				result -= map.get(s.charAt(i));
 			}
 		}
 
