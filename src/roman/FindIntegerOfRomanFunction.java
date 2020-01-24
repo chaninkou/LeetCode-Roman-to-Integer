@@ -25,7 +25,7 @@ public class FindIntegerOfRomanFunction {
 		// if there is only 1 symbol, it will just return result
 		int result = map.get(s.charAt(s.length() - 1));
 
-		// Read from right to left to prevent negative and also roman is always right to left
+		// Read from right to left to prevent negative and also reading roman is always right to left
 		// using length -2 since result is already the last element from the above code
 		for (int i = s.length() - 2; i >= 0; i--) {
 			// if current is less than the next character
